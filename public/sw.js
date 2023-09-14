@@ -19,6 +19,7 @@ const APP_SHELL = [
   'img/avatars/wolverine.jpg',
   'js/app.js',
   'js/sw-utils.js',
+  'js/sw-db.js',
 ];
 
 const APP_SHELL_INMUTABLE = [
@@ -73,4 +74,12 @@ self.addEventListener('fetch', async (e) => {
     });
   }
   e.respondWith(respuesta);
+});
+
+//Tasks async
+self.addEventListener('sync', (e) => {
+  console.log('Event: Sync');
+  if (e.tag === 'new-post') {
+    e.waitUntil(savePostsMessages());
+  }
 });

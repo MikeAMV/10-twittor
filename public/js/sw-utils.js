@@ -27,14 +27,17 @@ function actualizaCacheStatico(staticCache, req, APP_SHELL_INMUTABLE) {
 function apiMessagesManager(CACHE, req) {
   if (req.clone().method === 'POST') {
     //Tomar los datos del request, y guardarlos en el cache para después utilizarlos (No internet)
-    req
-      .clone()
-      .text()
-      .then((body) => {
-        const messageParsed = JSON.parse(body);
-        saveMessage(messageParsed);
-      });
-    return fetch(req);
+    if (self.registration.sync) {
+      return req
+        .clone()
+        .text()
+        .then((body) => {
+          const messageParsed = JSON.parse(body);
+          return saveMessage(messageParsed);
+        });
+    } else {
+      return fetch(req);
+    }
   } else {
     return fetch(req)
       .then((res) => {

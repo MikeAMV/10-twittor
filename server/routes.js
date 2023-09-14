@@ -25,6 +25,7 @@ router.post('/', function (req, res) {
     const { message, user } = req.body;
     const payload = { message, user };
     messages.push(payload);
+    console.log(messages);
     res.json({ message, ok: true });
   } catch (error) {
     res.json({ message: 'Error' });
