@@ -20,10 +20,13 @@ const APP_SHELL = [
   'js/app.js',
   'js/sw-utils.js',
   'js/sw-db.js',
+  'css/mdtoast.min.css',
+  'js/mdtoast.min.js',
 ];
 
 const APP_SHELL_INMUTABLE = [
   'https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&display=swap',
+  'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap',
   'https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css',
   'https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css',

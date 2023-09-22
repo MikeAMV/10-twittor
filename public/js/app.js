@@ -151,3 +151,65 @@ function getMessages() {
     });
 }
 getMessages();
+
+//Detect network changes
+function isOnline() {
+  if (navigator.onLine) {
+    console.log('We have network');
+    mdtoast('OnLine', {
+      type: 'success',
+      interaction: true,
+      interactionTimeout: 1500,
+      actionText: 'Aceptar',
+    });
+  } else {
+    console.log('We dont have network');
+    mdtoast('OffLine', {
+      type: 'info',
+      interaction: true,
+      actionText: 'Aceptar',
+    });
+  }
+}
+
+window.addEventListener('online', isOnline);
+window.addEventListener('offline', isOnline);
+
+//Ask for Notifications
+function notify() {
+  if (!window.Notification) {
+    mdtoast('NotSupportNotification', {
+      type: 'warning',
+      interaction: true,
+      interactionTimeout: 1500,
+      actionText: 'Aceptar',
+    });
+    return;
+  }
+  if (Notification.permission === 'granted') {
+    sendNotification();
+  } else if (
+    Notification.permission !== 'denied' ||
+    Notification.permission === 'default'
+  ) {
+    Notification.requestPermission((permission) => {
+      console.log(permission);
+      if (permission === 'granted') {
+        new Notification('Permission granted');
+      }
+    });
+  }
+}
+
+notify();
+
+function sendNotification(params) {
+  const config = {
+    body: 'Notification body',
+    icon: 'img/icons/icon-72x72.png',
+  };
+  const n = new Notification('Notification test', config);
+  n.onclick = () => {
+    console.log('clicked');
+  };
+}
